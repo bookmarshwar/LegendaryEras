@@ -14,7 +14,7 @@ public class Main {
     public  static  void playerJoinWorld(PlayerEvent.PlayerLoggedInEvent event){
         Player player =(Player) event.getEntity();
         Level level=player.level;
-        player.sendSystemMessage(Component.nullToEmpty("xxx º”»Î”Œœ∑"));
+        player.sendSystemMessage(Component.nullToEmpty("xxx"));
     }
 
 }
