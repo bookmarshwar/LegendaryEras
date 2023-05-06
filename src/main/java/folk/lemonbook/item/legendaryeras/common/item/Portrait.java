@@ -2,9 +2,10 @@ package folk.lemonbook.item.legendaryeras.common.item;
 
 import net.minecraft.world.item.Item;
 
-public class PowerCrank extends Item {
+public class Portrait extends Item {
 
-    public PowerCrank(Properties properties) {
+    public Portrait(Properties properties) {
+
         super(properties);
     }
 }
