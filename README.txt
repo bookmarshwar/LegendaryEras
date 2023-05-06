@@ -1,46 +1,35 @@
+## 目录
+- [上手指南](#上手指南)
+- [你需要了解的一些信息](#信息)
+- [部署](#部署)
+- [关于api](#已经实现的方法)
+- [作者](#作者)
+- [未来更新](#关于更新)
+- [关于版权](#版权说明)
 
-Source installation information for modders
--------------------------------------------
-This code follows the Minecraft Forge installation methodology. It will apply
-some small patches to the vanilla MCP source code, giving you and it access 
-to some of the data and functions you need to build a successful mod.
+### 信息
+  - Minecraft目标版本1.19.2,如果需要兼容其他版本,请联系开发者
 
-Note also that the patches are built against "un-renamed" MCP source code (aka
-SRG Names) - this means that you will not be able to read them directly against
-normal code.
+### 上手指南
+   暂无
 
-Setup Process:
-==============================
+### 部署
+    暂无
+暂无
+### 已经实现的物品
+    - 作者头像(后期删除
+    - 作者的儿子(好吃的跳起来,后期删除
 
-Step 1: Open your command-line and browse to the folder where you extracted the zip file.
+### 作者
 
-Step 2: You're left with a choice.
-If you prefer to use Eclipse:
-1. Run the following command: `gradlew genEclipseRuns` (`./gradlew genEclipseRuns` if you are on Mac/Linux)
-2. Open Eclipse, Import > Existing Gradle Project > Select Folder 
-   or run `gradlew eclipse` to generate the project.
+3027132957@qq.com
 
-If you prefer to use IntelliJ:
-1. Open IDEA, and import project.
-2. Select your build.gradle file and have it import.
-3. Run the following command: `gradlew genIntellijRuns` (`./gradlew genIntellijRuns` if you are on Mac/Linux)
-4. Refresh the Gradle Project in IDEA if required.
+b站:[527689777](https://space.bilibili.com/527689777)  &ensp; qq:3027132957
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can 
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+### 关于更新
 
-Mapping Names:
-=============================
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license, if you do not agree with it you can change your mapping names to other crowdsourced names in your 
-build.gradle. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/MinecraftForge/MCPConfig/blob/master/Mojang.md
+如果有更多需求,可以找到我,我会尽快更新
 
-Additional Resources: 
-=========================
-Community Documentation: https://mcforge.readthedocs.io/en/latest/gettingstarted/  
-LexManos' Install Video: https://www.youtube.com/watch?v=8VEdtQLuLO0  
-Forge Forum: https://forums.minecraftforge.net/  
-Forge Discord: https://discord.gg/UvedJ9m  
+### 版权说明
+
+该项目签署了MIT 授权许可，详情请参阅 [LICENSE.txt](https://github.com/shaojintian/Best_README_template/blob/master/LICENSE.txt)
