@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "legendaryeras:blocks/potential_energy_generator"
+  }
+}

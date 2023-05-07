@@ -1,5 +1,7 @@
 {
   "item.legendaryeras.portrait": "Author's portrait",
   "itemGroup.legendaryeras": "Legendary Eras",
-  "item.legendaryeras.portrait_son": "The portrait of the author's son"
+  "item.legendaryeras.portrait_son": "The portrait of the author's son",
+  "block.legendaryeras.kinetic_energy_generator": "Kinetic Energy Generator",
+  "block.legendaryeras.potential_energy_generator": "Potential Energy Generator"
 }

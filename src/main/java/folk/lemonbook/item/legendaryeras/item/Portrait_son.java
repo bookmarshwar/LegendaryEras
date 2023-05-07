@@ -1,4 +1,4 @@
-package folk.lemonbook.item.legendaryeras.common.item;
+package folk.lemonbook.item.legendaryeras.item;
 
 import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.world.item.Item;
@@ -8,3 +8,4 @@ public class Portrait_son extends Item {
         super(properties);
     }
 }
+

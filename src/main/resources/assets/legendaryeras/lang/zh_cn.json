@@ -1,6 +1,8 @@
 {
   "item.legendaryeras.portrait": "作者头像",
   "itemGroup.legendaryeras": "传奇时代",
-  "item.legendaryeras.portrait_son": "作者的儿子"
+  "item.legendaryeras.portrait_son": "作者的儿子",
+  "block.legendaryeras.kinetic_energy_generator": "动能发生器",
+  "block.legendaryeras.potential_energy_generator": "势能发生器"
 
 }

@@ -1,10 +1,13 @@
-package folk.lemonbook.item.legendaryeras.core.init;
+package folk.lemonbook.item.legendaryeras.init;
 
 import folk.lemonbook.item.legendaryeras.Main;
-import folk.lemonbook.item.legendaryeras.common.item.Portrait;
+import folk.lemonbook.item.legendaryeras.block.KineticEnergyGenerator;
+import folk.lemonbook.item.legendaryeras.item.Portrait;
+import folk.lemonbook.item.legendaryeras.item.Portrait_son;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -21,17 +24,19 @@ public class ItemInit {
 
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(Portrait.get());
+            return new ItemStack(PORTRAIT.get());//获取PORTRAIT图标给项目栏//作者头像
         }
     }
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Main.MOD_ID);//注册对象
-    public static final RegistryObject<Portrait> Portrait =ITEMS.register("portrait",() -> new Portrait(new Item.Properties().tab(ModCreativeTab.instance)));
-    public static final RegistryObject<Portrait> Portrait_son =ITEMS.register("portrait_son",() -> new Portrait(new Item.Properties().tab(ModCreativeTab.instance).food(new FoodProperties.Builder()
+    public static final RegistryObject<Portrait> PORTRAIT =ITEMS.register("portrait",() -> new Portrait(new Item.Properties().tab(ModCreativeTab.instance)));
+    public static final RegistryObject<Portrait_son> PORTRAIT_SON =ITEMS.register("portrait_son",() -> new Portrait_son(new Item.Properties().tab(ModCreativeTab.instance).food(new FoodProperties.Builder()
             .nutrition(-1)//饱食度
             .saturationMod(10)//金色饱食度
             .effect(() -> new MobEffectInstance(MobEffects.JUMP, 100*20, 2), 1)//百分百给予一个跳跃提升2+1;
             .build())));//结束返回build
-
+    //方块物品注册
+    public static final RegistryObject<Item> KINETIC_ENERGY_GENERATOR= ITEMS.register("kinetic_energy_generator",()->new BlockItem(BlockInit.KINETIC_ENERGY_GENERATOR.get(), new Item.Properties().tab(ModCreativeTab.instance)));
+    public static final RegistryObject<Item> POTENTIAL_ENERGY_GENERATOR =ITEMS.register("potential_energy_generator",()-> new BlockItem(BlockInit.POTENTIAL_ENERGY_GENERATOR.get(), new Item.Properties().tab(ModCreativeTab.instance)));
 }
 
 
