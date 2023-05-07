@@ -37,6 +37,11 @@ public class ItemInit {
     //·½¿éÎïÆ·×¢²á
     public static final RegistryObject<Item> KINETIC_ENERGY_GENERATOR= ITEMS.register("kinetic_energy_generator",()->new BlockItem(BlockInit.KINETIC_ENERGY_GENERATOR.get(), new Item.Properties().tab(ModCreativeTab.instance)));
     public static final RegistryObject<Item> POTENTIAL_ENERGY_GENERATOR =ITEMS.register("potential_energy_generator",()-> new BlockItem(BlockInit.POTENTIAL_ENERGY_GENERATOR.get(), new Item.Properties().tab(ModCreativeTab.instance)));
+    public static final RegistryObject<Item> TURBINE =ITEMS.register("turbine",()-> new BlockItem(BlockInit.TURBINE.get(), new Item.Properties().tab(ModCreativeTab.instance)));
+    public static final RegistryObject<Item> GPEG_STRUCTURAL_BODIES =ITEMS.register("gpeg_structuralbodies",()-> new BlockItem(BlockInit.GPEG_STRUCTURAL_BODIES.get(), new Item.Properties().tab(ModCreativeTab.instance)));
+    public static final RegistryObject<Item> GPEG_TOP =ITEMS.register("gpeg_top",()-> new BlockItem(BlockInit.GPEG_TOP.get(), new Item.Properties().tab(ModCreativeTab.instance)));
+    public static final RegistryObject<Item> GPEG_BASE =ITEMS.register("gpeg_base",()-> new BlockItem(BlockInit.GPEG_BASE.get(), new Item.Properties().tab(ModCreativeTab.instance)));
+
 }
 
 
