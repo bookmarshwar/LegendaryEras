@@ -1,7 +1,6 @@
 package folk.lemonbook.item.legendaryeras.init;
 
 import folk.lemonbook.item.legendaryeras.Main;
-import folk.lemonbook.item.legendaryeras.block.KineticEnergyGenerator;
 import folk.lemonbook.item.legendaryeras.item.Portrait;
 import folk.lemonbook.item.legendaryeras.item.Portrait_son;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -35,12 +34,17 @@ public class ItemInit {
             .effect(() -> new MobEffectInstance(MobEffects.JUMP, 100*20, 2), 1)//百分百给予一个跳跃提升2+1;
             .build())));//结束返回build
     //方块物品注册
-    public static final RegistryObject<Item> KINETIC_ENERGY_GENERATOR= ITEMS.register("kinetic_energy_generator",()->new BlockItem(BlockInit.KINETIC_ENERGY_GENERATOR.get(), new Item.Properties().tab(ModCreativeTab.instance)));
-    public static final RegistryObject<Item> POTENTIAL_ENERGY_GENERATOR =ITEMS.register("potential_energy_generator",()-> new BlockItem(BlockInit.POTENTIAL_ENERGY_GENERATOR.get(), new Item.Properties().tab(ModCreativeTab.instance)));
+    public static final RegistryObject<Item> KINETIC_ENERGY_CONVERTER= ITEMS.register("kinetic_energy_converter",()->new BlockItem(BlockInit.KINETIC_ENERGY_CONVERTER.get(), new Item.Properties().tab(ModCreativeTab.instance)));
+    public static final RegistryObject<Item> POTENTIAL_ENERGY_CONVERTER =ITEMS.register("potential_energy_converter",()-> new BlockItem(BlockInit.POTENTIAL_ENERGY_CONVERTER.get(), new Item.Properties().tab(ModCreativeTab.instance)));
     public static final RegistryObject<Item> TURBINE =ITEMS.register("turbine",()-> new BlockItem(BlockInit.TURBINE.get(), new Item.Properties().tab(ModCreativeTab.instance)));
     public static final RegistryObject<Item> GPEG_STRUCTURAL_BODIES =ITEMS.register("gpeg_structuralbodies",()-> new BlockItem(BlockInit.GPEG_STRUCTURAL_BODIES.get(), new Item.Properties().tab(ModCreativeTab.instance)));
     public static final RegistryObject<Item> GPEG_TOP =ITEMS.register("gpeg_top",()-> new BlockItem(BlockInit.GPEG_TOP.get(), new Item.Properties().tab(ModCreativeTab.instance)));
     public static final RegistryObject<Item> GPEG_BASE =ITEMS.register("gpeg_base",()-> new BlockItem(BlockInit.GPEG_BASE.get(), new Item.Properties().tab(ModCreativeTab.instance)));
+    public static final RegistryObject<Item> STEAM_BOILER =ITEMS.register("steam_boiler",()-> new BlockItem(BlockInit.STEAM_BOILER.get(), new Item.Properties().tab(ModCreativeTab.instance)));
+    public static final RegistryObject<Item> BATTERY =ITEMS.register("battery",()-> new BlockItem(BlockInit.BATTERY.get(), new Item.Properties().tab(ModCreativeTab.instance)));
+    public static final RegistryObject<Item> COMBUSTION_CHAMBER =ITEMS.register("combustion_chamber",()-> new BlockItem(BlockInit.COMBUSTION_CHAMBER.get(), new Item.Properties().tab(ModCreativeTab.instance)));
+    public static final RegistryObject<Item> GENERATOR =ITEMS.register("generator",()-> new BlockItem(BlockInit.GENERATOR.get(), new Item.Properties().tab(ModCreativeTab.instance)));
+
 
 }
 

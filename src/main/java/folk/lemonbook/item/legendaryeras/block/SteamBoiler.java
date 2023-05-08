@@ -2,11 +2,11 @@ package folk.lemonbook.item.legendaryeras.block;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Material;
-//涡轮机,输入蒸气,产生动能
-public class Turbine extends Block {
 
-    public Turbine() {
+//蒸气锅炉,将水转换为高压蒸气
+public class SteamBoiler extends Block {
+    private int heat_energy =0;//热能 //创建时为零嘛
+    public SteamBoiler() {
         super(Block.Properties.of(Material.STONE).strength(4f, 1200f));
     }
 }
-//燃烧室->蒸气锅炉->涡轮机->发电机(火力发电机)
