@@ -2,6 +2,7 @@ package folk.lemonbook.item.legendaryeras.init;
 
 import folk.lemonbook.item.legendaryeras.Main;
 import folk.lemonbook.item.legendaryeras.block.*;
+import folk.lemonbook.item.legendaryeras.machine.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -19,8 +20,4 @@ public class BlockInit {
     public static final RegistryObject<Battery> BATTERY  = BLOCKS.register("battery", Battery::new);
     public static final RegistryObject<CombustionChamber> COMBUSTION_CHAMBER  = BLOCKS.register("combustion_chamber", CombustionChamber::new);
     public static final RegistryObject<Generator> GENERATOR  = BLOCKS.register("generator", Generator::new);
-
-
-
-
 }

@@ -1,4 +1,4 @@
-package folk.lemonbook.item.legendaryeras.block;
+package folk.lemonbook.item.legendaryeras.machine;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Material;
