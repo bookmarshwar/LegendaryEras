@@ -24,7 +24,7 @@ public class CombustionChamberMenu  extends AbstractContainerMenu {
 
     public CombustionChamberMenu(int id, Inventory inv, BlockEntity entity, ContainerData data) {
         super(MenuInit.COMBUSTION_CHAMBER_MENU.get(),id);
-        checkContainerSize(inv,3);//检查机器是否为三个槽位
+        checkContainerSize(inv,1);//检查机器是否为三个槽位
         this.entity=(CombustionChamberEntity) entity;
         this.level =inv.player.level;
         this.data=data;
@@ -33,10 +33,7 @@ public class CombustionChamberMenu  extends AbstractContainerMenu {
         addPlayerHotbar(inv);
         //绘制menu
         this.entity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler->{
-            this.addSlot(new SlotItemHandler(handler,0,12,15));
-            this.addSlot(new SlotItemHandler(handler,1,86,15));
-            this.addSlot(new SlotItemHandler(handler,2,86,60));
-
+            this.addSlot(new SlotItemHandler(handler,0,75,20));
         });
         addDataSlots(data);
     }

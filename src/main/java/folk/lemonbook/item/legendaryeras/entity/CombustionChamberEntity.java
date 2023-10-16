@@ -2,7 +2,6 @@ package folk.lemonbook.item.legendaryeras.entity;
 
 import folk.lemonbook.item.legendaryeras.gui.CombustionChamberMenu;
 import folk.lemonbook.item.legendaryeras.init.EntityInit;
-import folk.lemonbook.item.legendaryeras.init.ItemInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -17,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
@@ -26,20 +26,21 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class CombustionChamberEntity extends BlockEntity implements MenuProvider {
-    private final ItemStackHandler itemStackHandler = new ItemStackHandler(3) {
+    private final ItemStackHandler itemStackHandler = new ItemStackHandler(1) {
 
         @Override
         protected void onContentsChanged(int slot) {
-            for(int i=0;i<itemStackHandler.getSlots();++i){
-            System.out.println(i+""+itemStackHandler.getStackInSlot(i));}
             setChanged();
         }
     };
     //开启三个物品槽
     protected  final ContainerData data ;
     private  int progress=0;
-    private  int maxProgress=78;
-
+    private  int maxProgress=100;
+    private int heatEnergy=0;
+    private int MaxHeatEnergy=1000000;//7200kJ
+    private int times=0;//tick时间
+    //煤炭块 7200k/7200s, 煤炭 800k
     private  LazyOptional<IItemHandler> lazyOptional =LazyOptional.empty();
 
     public CombustionChamberEntity(BlockPos pos, BlockState state) {
@@ -129,40 +130,70 @@ public class CombustionChamberEntity extends BlockEntity implements MenuProvider
         }//仅在服务端执行
         if(hasPecipe(entity)){
             //增加进度
-            entity.progress++;
+            System.out.println("heat:"+entity.progress);
+            craftHeatEnergy(entity);
             setChanged(level,pos,state);
-            if(entity.progress>= entity.maxProgress){
-                craftItem(entity);//合成一个物品
+            if(entity.progress>entity.maxProgress){
+
+                entity.resetProgress();
             }
         }else {
-            entity.resetProgress();
             setChanged(level,pos,state);
         }
 
     }
 
+    private static boolean hasPecipe(CombustionChamberEntity entity) {
+        ItemStack fuelStack = entity.itemStackHandler.getStackInSlot(0);//获取一号槽位
+        int burnTime =ForgeHooks.getBurnTime(fuelStack,null);
+        if(burnTime > 0){
+            if(entity.heatEnergy== entity.MaxHeatEnergy){
+                return false;
+            }
+            return true;//可燃
+        }else{
+
+            return false;//不可燃
+        }
+    }//判断是否可燃烧
+
     private void resetProgress() {
         this.progress=0;
     }
+    private  static void craftHeatEnergy(CombustionChamberEntity entity){
 
-    private static void craftItem(CombustionChamberEntity entity) {
+        if(entity.times<=0){
+            entity.times=0;
+            entity.times+=ForgeHooks.getBurnTime(entity.itemStackHandler.getStackInSlot(0),null)/2;;
+            entity.itemStackHandler.extractItem(0,1,false);
+        }
+        if(entity.heatEnergy>= entity.MaxHeatEnergy){
+            entity.heatEnergy=entity.MaxHeatEnergy;
+        }else {
+            entity.heatEnergy += 1000;
+        }
+        entity.times-=1;
+        entity.progress=entity.heatEnergy/10000;
+
+    }
+/*    private static void craftItem(CombustionChamberEntity entity) {
         if(hasPecipe(entity)){
             entity.itemStackHandler.extractItem(1,1,false);
             entity.itemStackHandler.setStackInSlot(2,new ItemStack(ItemInit.PORTRAIT_SON.get(),entity.itemStackHandler.getStackInSlot(2).getCount()+1));
             entity.resetProgress();
         }
-    }
+    }*/
 
-    private static boolean hasPecipe(CombustionChamberEntity entity) {
+/*    private static boolean hasPecipe(CombustionChamberEntity entity) {
         SimpleContainer inventory =new SimpleContainer(entity.itemStackHandler.getSlots());
         for(int i=0;i<entity.itemStackHandler.getSlots();++i){
             inventory.setItem(i,entity.itemStackHandler.getStackInSlot(i));
         }
         boolean firstSlot=entity.itemStackHandler.getStackInSlot(1).getItem()==ItemInit.PORTRAIT.get();
         return  firstSlot && canInsert_amount(inventory)&&canInsert_item(inventory,new ItemStack(ItemInit.PORTRAIT_SON.get(),1));
-    }
+    }*/
 
-    private static boolean canInsert_item(SimpleContainer inventory, ItemStack itemStack) {
+/*    private static boolean canInsert_item(SimpleContainer inventory, ItemStack itemStack) {
         return inventory.getItem(2).getItem()==itemStack.getItem()||inventory.getItem(2).isEmpty();
     }//判断容器是否为空或者同一物品可堆叠
 
@@ -171,4 +202,4 @@ public class CombustionChamberEntity extends BlockEntity implements MenuProvider
         return  inventory.getItem(2).getMaxStackSize()> inventory.getItem(2).getCount();
     }
 
-}
+}*/}
