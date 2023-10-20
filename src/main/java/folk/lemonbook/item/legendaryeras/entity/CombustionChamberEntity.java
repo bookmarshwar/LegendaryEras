@@ -2,7 +2,9 @@ package folk.lemonbook.item.legendaryeras.entity;
 
 import folk.lemonbook.item.legendaryeras.gui.CombustionChamberMenu;
 import folk.lemonbook.item.legendaryeras.init.EntityInit;
+import folk.lemonbook.item.legendaryeras.machine.CombustionChamber;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Containers;
@@ -25,12 +27,22 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
+
 public class CombustionChamberEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemStackHandler = new ItemStackHandler(1) {
 
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+        }
+
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            return switch (slot){
+                case 0->true;
+                default ->super.isItemValid(slot,stack);
+            };
         }
     };
     //开启三个物品槽
@@ -42,7 +54,14 @@ public class CombustionChamberEntity extends BlockEntity implements MenuProvider
     private int times=0;//tick时间
     //煤炭块 7200k/7200s, 煤炭 800k
     private  LazyOptional<IItemHandler> lazyOptional =LazyOptional.empty();
-
+    private final Map<Direction, LazyOptional<WrappedHandler>> directionLazyOptionalMap= Map.of(
+            Direction.DOWN,LazyOptional.of(()->new WrappedHandler(itemStackHandler,(i)->i==0,(i,s)->itemStackHandler.isItemValid(0,s))),
+            Direction.NORTH, LazyOptional.of(()->new WrappedHandler(itemStackHandler,(i)->i==0,(i,s)->itemStackHandler.isItemValid(0,s))),
+            Direction.SOUTH, LazyOptional.of(()->new WrappedHandler(itemStackHandler,(i)->i==0,(i,s)->itemStackHandler.isItemValid(0,s))),
+            Direction.EAST, LazyOptional.of(()->new WrappedHandler(itemStackHandler,(i)->i==0,(i,s)->itemStackHandler.isItemValid(0,s))),
+            Direction.WEST, LazyOptional.of(()->new WrappedHandler(itemStackHandler,(i)->i==0,(i,s)->itemStackHandler.isItemValid(0,s))),
+            Direction.UP, LazyOptional.of(()->new WrappedHandler(itemStackHandler,(i)->i==0,(i,s)->itemStackHandler.isItemValid(0,s)))
+            );
     public CombustionChamberEntity(BlockPos pos, BlockState state) {
         super(EntityInit.COMBUSTION_CHAMBER_ENTITY.get(), pos, state);
         this.data = new ContainerData() {
@@ -83,8 +102,23 @@ public class CombustionChamberEntity extends BlockEntity implements MenuProvider
     }
 
     @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap) {
+    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap,@Nullable Direction side) {
         if(cap == ForgeCapabilities.ITEM_HANDLER){
+            if(side==null){
+                return lazyOptional.cast();
+            }
+            if(directionLazyOptionalMap.containsKey(side)){
+                Direction direction=this.getBlockState().getValue(CombustionChamber.FACING);
+                if (side==Direction.UP||side==Direction.DOWN){
+                    return directionLazyOptionalMap.get(side).cast();
+                }
+                return switch (direction){
+                    default -> directionLazyOptionalMap.get(side.getOpposite()).cast();
+                    case EAST -> directionLazyOptionalMap.get(side.getClockWise()).cast();
+                    case SOUTH -> directionLazyOptionalMap.get(side).cast();
+                    case WEST -> directionLazyOptionalMap.get(side.getCounterClockWise()).cast();
+                };
+            }
             return lazyOptional.cast();
         }
         return super.getCapability(cap);

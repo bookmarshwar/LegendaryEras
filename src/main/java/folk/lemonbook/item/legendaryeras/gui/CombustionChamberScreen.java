@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class CombustionChamberScreen extends AbstractContainerScreen<CombustionChamberMenu> {
-    private  static  final ResourceLocation TEXTURE = new ResourceLocation(Main.MOD_ID,"textures/gui/dbian.png");
+    private  static  final ResourceLocation TEXTURE = new ResourceLocation(Main.MOD_ID,"textures/gui/dbian2.png");
     public CombustionChamberScreen(CombustionChamberMenu menu, Inventory inventory, Component component) {
         super(menu, inventory, component);
     }
@@ -20,9 +20,11 @@ public class CombustionChamberScreen extends AbstractContainerScreen<CombustionC
         RenderSystem.setShader(GameRenderer::getPositionColorTexShader);
         RenderSystem.setShaderColor(1.0F,1.0f,1.0f,1.0f);
         RenderSystem.setShaderTexture(0,TEXTURE);
+        imageWidth=160;
+        imageHeight=150;
         int x=(width-imageWidth)/2;
         int y= (height-imageHeight)/2;
-        this.blit(pPoseStack,x,y,0,0,imageWidth,imageHeight);
+        this.blit(pPoseStack,x,y,10,10,imageWidth,imageHeight);
         renderProgressArrow(pPoseStack,x,y);
     }
 
@@ -42,6 +44,7 @@ public class CombustionChamberScreen extends AbstractContainerScreen<CombustionC
     @Override
     protected void init() {
         super.init();
+
     }
 
 }
