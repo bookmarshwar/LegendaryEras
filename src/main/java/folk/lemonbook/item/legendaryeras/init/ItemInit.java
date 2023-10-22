@@ -1,6 +1,7 @@
 package folk.lemonbook.item.legendaryeras.init;
 
 import folk.lemonbook.item.legendaryeras.Main;
+import folk.lemonbook.item.legendaryeras.item.CokingCoal;
 import folk.lemonbook.item.legendaryeras.item.Portrait;
 import folk.lemonbook.item.legendaryeras.item.Portrait_son;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -44,9 +45,9 @@ public class ItemInit {
     public static final RegistryObject<Item> BATTERY =ITEMS.register("battery",()-> new BlockItem(BlockInit.BATTERY.get(), new Item.Properties().tab(ModCreativeTab.instance)));
     public static final RegistryObject<Item> COMBUSTION_CHAMBER =ITEMS.register("combustion_chamber",()-> new BlockItem(BlockInit.COMBUSTION_CHAMBER.get(), new Item.Properties().tab(ModCreativeTab.instance)));
     public static final RegistryObject<Item> GENERATOR =ITEMS.register("generator",()-> new BlockItem(BlockInit.GENERATOR.get(), new Item.Properties().tab(ModCreativeTab.instance)));
-
-
+    public static final RegistryObject<Item>  BASIC_MACHINE_FRAMEWORK=ITEMS.register("basic_machine_framework",()->new BlockItem(BlockInit.BASIC_MACHINE_FRAMEWORK.get(), new Item.Properties().tab(ModCreativeTab.instance)));
+    public static final RegistryObject<CokingCoal> COKING_COAL=ITEMS.register("coking_coal",()->new CokingCoal(new Item.Properties().tab(ModCreativeTab.instance)));
+    public static final RegistryObject<Item> COKING_FURNACE=ITEMS.register("coking_furnace",()->new BlockItem(BlockInit.COKING_FURNACE.get(),new Item.Properties().tab(ModCreativeTab.instance) ));
 }
-
 
 

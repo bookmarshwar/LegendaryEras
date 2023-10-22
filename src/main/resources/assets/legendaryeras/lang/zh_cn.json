@@ -2,6 +2,7 @@
   "item.legendaryeras.portrait": "作者头像",
   "itemGroup.legendaryeras": "传奇时代",
   "item.legendaryeras.portrait_son": "作者的儿子",
+  "item.legendaryeras.coking_coal": "焦煤",
   "block.legendaryeras.kinetic_energy_converter": "动能发生器",
   "block.legendaryeras.potential_energy_converter": "势能发生器",
   "block.legendaryeras.steam_boiler": "蒸气锅炉",
@@ -11,5 +12,6 @@
   "block.legendaryeras.gpeg_base": "重力势能发生底座",
   "block.legendaryeras.gpeg_structuralbodies": "重力势能发生结构体",
   "block.legendaryeras.turbine": "涡轮机",
-  "block.legendaryeras.generator": "发电机"
+  "block.legendaryeras.generator": "发电机",
+  "block.legendaryeras.basic_machine_framework": "基础机器框架"
 }

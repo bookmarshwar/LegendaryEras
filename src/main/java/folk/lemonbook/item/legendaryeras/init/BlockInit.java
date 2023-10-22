@@ -20,4 +20,6 @@ public class BlockInit {
     public static final RegistryObject<Battery> BATTERY  = BLOCKS.register("battery", Battery::new);
     public static final RegistryObject<CombustionChamber> COMBUSTION_CHAMBER  = BLOCKS.register("combustion_chamber", CombustionChamber::new);
     public static final RegistryObject<Generator> GENERATOR  = BLOCKS.register("generator", Generator::new);
+    public static final RegistryObject<BasicMachineFramework> BASIC_MACHINE_FRAMEWORK= BLOCKS.register("basic_machine_framework",BasicMachineFramework::new);
+    public static final RegistryObject<CokingFurnace> COKING_FURNACE=BLOCKS.register("coking_furnace",CokingFurnace::new);
 }

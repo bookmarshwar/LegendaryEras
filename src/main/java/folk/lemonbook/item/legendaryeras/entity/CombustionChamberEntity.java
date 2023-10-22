@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
-
+//È¼ÉÕÊÒÊµÌå
 public class CombustionChamberEntity extends BlockEntity implements MenuProvider {
     private final ItemStackHandler itemStackHandler = new ItemStackHandler(1) {
 
@@ -62,6 +62,9 @@ public class CombustionChamberEntity extends BlockEntity implements MenuProvider
             Direction.WEST, LazyOptional.of(()->new WrappedHandler(itemStackHandler,(i)->i==0,(i,s)->itemStackHandler.isItemValid(0,s))),
             Direction.UP, LazyOptional.of(()->new WrappedHandler(itemStackHandler,(i)->i==0,(i,s)->itemStackHandler.isItemValid(0,s)))
             );
+
+
+
     public CombustionChamberEntity(BlockPos pos, BlockState state) {
         super(EntityInit.COMBUSTION_CHAMBER_ENTITY.get(), pos, state);
         this.data = new ContainerData() {
@@ -92,7 +95,7 @@ public class CombustionChamberEntity extends BlockEntity implements MenuProvider
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("stand is dabian,so good!");
+        return Component.literal("È¼ÉÕÂ¯");
     }
 
     @Nullable

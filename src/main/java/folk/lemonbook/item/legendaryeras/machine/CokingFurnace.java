@@ -1,5 +1,6 @@
 package folk.lemonbook.item.legendaryeras.machine;
 
+import folk.lemonbook.item.legendaryeras.entity.CokingFurnaceEntity;
 import folk.lemonbook.item.legendaryeras.entity.CombustionChamberEntity;
 import folk.lemonbook.item.legendaryeras.init.EntityInit;
 import net.minecraft.core.BlockPos;
@@ -22,14 +23,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-//燃烧室,提供热能
-public class CombustionChamber extends BaseEntityBlock {
+public class CokingFurnace extends BaseEntityBlock {
     public   static  final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    //热能效率,
-    //private float heat_efficiency=1f;
-    //热效增加升级
 
-
+    public CokingFurnace() {
+        super(Block.Properties.of(Material.STONE).strength(4f, 1200f));
+    }
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext blockPlaceContext) {
@@ -52,9 +51,6 @@ public class CombustionChamber extends BaseEntityBlock {
         builder.add(FACING);//增加属性
     }
 
-    public CombustionChamber() {
-        super(Block.Properties.of(Material.STONE).strength(4f, 1200f));
-    }
 
     @Nullable
     @Override
@@ -71,7 +67,7 @@ public class CombustionChamber extends BaseEntityBlock {
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if(state.getBlock()!=newState.getBlock()){
             BlockEntity blockEntity=level.getBlockEntity(pos);
-            if(blockEntity instanceof CombustionChamberEntity entity){
+            if(blockEntity instanceof CokingFurnaceEntity entity){
                 entity.drops();//判断移除时是否为正确实体,掉落物品
             }
         }
@@ -83,8 +79,8 @@ public class CombustionChamber extends BaseEntityBlock {
 
         if(!level.isClientSide()){
             BlockEntity entity=level.getBlockEntity(pos);
-            if(entity instanceof CombustionChamberEntity){
-                NetworkHooks.openScreen((ServerPlayer) player,(CombustionChamberEntity) entity,pos);
+            if(entity instanceof CokingFurnaceEntity){
+                NetworkHooks.openScreen((ServerPlayer) player,(CokingFurnaceEntity) entity,pos);
             }
             else {
                 try {
@@ -101,6 +97,6 @@ public class CombustionChamber extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return createTickerHelper(type,EntityInit.COMBUSTION_CHAMBER_ENTITY.get(),CombustionChamberEntity::tick);
+        return createTickerHelper(type, EntityInit.COKING_FURNACE_ENTITY.get(), CokingFurnaceEntity::tick);
     }
 }
