@@ -1,8 +1,9 @@
 package folk.lemonbook.item.legendaryeras.entity;
 
+import folk.lemonbook.item.legendaryeras.gui.CombustionChamberMenu;
 import folk.lemonbook.item.legendaryeras.init.EntityInit;
-import folk.lemonbook.item.legendaryeras.machine.CokingFurnace;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
@@ -11,13 +12,18 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 //焦化炉
 public class CokingFurnaceEntity extends BlockEntity implements MenuProvider {
+    private  LazyOptional<IItemHandler> lazyOptional =LazyOptional.empty();
     public CokingFurnaceEntity(BlockPos pos, BlockState state) {
         super(EntityInit.COKING_FURNACE_ENTITY.get(), pos, state);
         this.data = new ContainerData() {
@@ -102,8 +108,50 @@ public class CokingFurnaceEntity extends BlockEntity implements MenuProvider {
     private static void craftHeatEnergy(CokingFurnaceEntity entity) {
     }
 
-    private static boolean hasPecipe(CokingFurnaceEntity entity) {
+    private static boolean hasPecipe(CokingFurnaceEntity entity) {//建立合成表
+        SimpleContainer inventory =new SimpleContainer(entity.itemStackHandler.getSlots());
+        for(int i=0;i<entity.itemStackHandler.getSlots();++i){
+            inventory.setItem(i,entity.itemStackHandler.getStackInSlot(i));
+        }
+        boolean firstSlot=entity.itemStackHandler.getStackInSlot(0).getItem()== Items.COAL;//检查是否是煤炭
+        return  firstSlot && canInsert_amount(inventory)&&canInsert_item(inventory,new ItemStack(Items.COAL,1));
     }
 
+    private static boolean canInsert_amount(SimpleContainer inventory) {
+        //判断是否可插入
+        return  inventory.getItem(1).getMaxStackSize()> inventory.getItem(1).getCount();
+    }
+    private static boolean canInsert_item(SimpleContainer inventory, ItemStack itemStack) {
+        return inventory.getItem(1).getItem()==itemStack.getItem()||inventory.getItem(1).isEmpty();
+    }//判断容器是否为空或者同一物品可堆叠
 
+    @Override
+    protected void saveAdditional(CompoundTag nbt) {
+        nbt.put("inventory",itemStackHandler.serializeNBT());
+        nbt.putInt("Coking.progress",this.progress);
+        super.saveAdditional(nbt);
+    }
+
+    @Override
+    public void load(CompoundTag nbt) {
+        itemStackHandler.deserializeNBT(nbt.getCompound("inventory"));
+        this.progress=nbt.getInt("Coking.progress");
+        super.load(nbt);
+    }
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        lazyOptional= LazyOptional.of(()->itemStackHandler);
+    }
+
+    @Override
+    public void invalidateCaps() {
+        super.invalidateCaps();
+        lazyOptional.invalidate();
+    }
+    @Nullable
+    @Override
+    public AbstractContainerMenu createMenu(int id, Inventory inv, Player player) {
+        return new menu(id,inv,this,this.data);
+    }
 }
