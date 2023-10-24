@@ -1,7 +1,6 @@
 package folk.lemonbook.item.legendaryeras.machine;
 
 import folk.lemonbook.item.legendaryeras.entity.CokingFurnaceEntity;
-import folk.lemonbook.item.legendaryeras.entity.CombustionChamberEntity;
 import folk.lemonbook.item.legendaryeras.init.EntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -55,7 +54,7 @@ public class CokingFurnace extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new CombustionChamberEntity(pos,state);
+        return new CokingFurnaceEntity(pos,state);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package folk.lemonbook.item.legendaryeras;
 
+import folk.lemonbook.item.legendaryeras.gui.CokingFurnaceScreen;
 import folk.lemonbook.item.legendaryeras.gui.CombustionChamberScreen;
 import folk.lemonbook.item.legendaryeras.init.BlockInit;
 import folk.lemonbook.item.legendaryeras.init.EntityInit;
@@ -27,6 +28,7 @@ public class Main {
         @SubscribeEvent
         public static void onClientSetUp(FMLClientSetupEvent event){
             MenuScreens.register(MenuInit.COMBUSTION_CHAMBER_MENU.get(), CombustionChamberScreen::new);
+            MenuScreens.register(MenuInit.COKING_FURNACE_MENU.get(), CokingFurnaceScreen::new);
         }
     }
 }
